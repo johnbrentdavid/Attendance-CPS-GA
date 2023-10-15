@@ -69,9 +69,26 @@ Partial Public Class frmAdmin
 
         getDepartment(cboStudentDepartment)
         getDepartment(cboDepartment)
-        getDepartment(cboViewDept)
+        'getDepartment(cboViewDept)
         'End of code about Add User
 
+        'Start of code about View Groupings
+        ' Center the Group 1 & 3
+        'xCenter = (tabGroupings.Size.Width * 0.3) - (grdGroup1.Size.Width / 2)
+        'yCenter = (tabGroupings.Size.Height * 0.3) - (grdGroup1.Size.Height / 2)
+        'grdGroup1.Location = New Point(xCenter, yCenter)
+        'xCenter = (tabGroupings.Size.Width * 0.3) - (grdGroup3.Size.Width / 2)
+        'yCenter = (tabGroupings.Size.Height * 0.7) - (grdGroup3.Size.Height / 2)
+        'grdGroup3.Location = New Point(xCenter, yCenter)
+        '' Center the Group 2 & 4
+        'temp = tabGroupings.Size.Width * 0.4
+        'xCenter = (temp + (tabGroupings.Size.Width - temp) / 2) - (grdGroup2.Size.Width / 2)
+        'yCenter = (tabGroupings.Size.Height * 0.3) - (grdGroup2.Size.Height / 2)
+        'grdGroup2.Location = New Point(xCenter, yCenter)
+        'xCenter = (temp + (tabGroupings.Size.Width - temp) / 2) - (grdGroup4.Size.Width / 2)
+        'yCenter = (tabGroupings.Size.Height * 0.7) - (grdGroup4.Size.Height / 2)
+        'grdGroup4.Location = New Point(xCenter, yCenter)
+        'end  of code about View Groupings
     End Sub
 
     'Private Sub cboOrg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboOrg.SelectedIndexChanged
@@ -520,46 +537,46 @@ Partial Public Class frmAdmin
     '
     ' View Attendance
     '
-    Private Sub cboDept_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboViewDept.SelectedIndexChanged
-        GetCurrentAttendance()
-    End Sub
+    'Private Sub cboDept_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboViewDept.SelectedIndexChanged
+    '    GetCurrentAttendance()
+    'End Sub
 
-    Private Sub RefreshView_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        GetCurrentAttendance()
-    End Sub
+    'Private Sub RefreshView_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+    '    GetCurrentAttendance()
+    'End Sub
 
-    Private Sub GetCurrentAttendance()
-        Dim conn As New MySqlConnection(stConnection)
+    'Private Sub GetCurrentAttendance()
+    '    Dim conn As New MySqlConnection(stConnection)
 
-        Try
-            conn.Open()
+    '    Try
+    '        conn.Open()
 
-            Dim stDate As String = Date.Now.ToString("yyyy-MM-dd")
-            Dim query = $"SELECT idtblattendance AS 'Attendance ID', ttimein AS 'Time In', tblstudent.dstudentid AS 'Student ID', dfullname AS 'Full Name', dcourse AS 'Course', dyearlevel AS 'Year Level'
-                        FROM tblattendance inner join tblstudent on tblattendance.dstudentid = tblstudent.dstudentid
-                        WHERE ttimein between '{stDate} 00:00:00' and '{stDate} 23:59:59' and ttimeout is null"
+    '        Dim stDate As String = Date.Now.ToString("yyyy-MM-dd")
+    '        Dim query = $"SELECT idtblattendance AS 'Attendance ID', ttimein AS 'Time In', tblstudent.dstudentid AS 'Student ID', dfullname AS 'Full Name', dcourse AS 'Course', dyearlevel AS 'Year Level'
+    '                    FROM tblattendance inner join tblstudent on tblattendance.dstudentid = tblstudent.dstudentid
+    '                    WHERE ttimein between '{stDate} 00:00:00' and '{stDate} 23:59:59' and ttimeout is null"
 
-            If cboViewDept.SelectedItem IsNot "All" Then
-                query += $" and ddepartment = '{cboViewDept.SelectedItem}'"
-            End If
+    '        If cboViewDept.SelectedItem IsNot "All" Then
+    '            query += $" and ddepartment = '{cboViewDept.SelectedItem}'"
+    '        End If
 
-            query += ";"
+    '        query += ";"
 
-            Dim command As New MySqlCommand(query, conn)
-            Dim dataset As New DataSet
-            Dim adapter As New MySqlDataAdapter With {
-                .SelectCommand = command
-            }
-            adapter.Fill(dataset, "Attendees")
+    '        Dim command As New MySqlCommand(query, conn)
+    '        Dim dataset As New DataSet
+    '        Dim adapter As New MySqlDataAdapter With {
+    '            .SelectCommand = command
+    '        }
+    '        adapter.Fill(dataset, "Attendees")
 
-            grdCurrentAttendance.DataSource = dataset.Tables("Attendees")
+    '        grdGroup1.DataSource = dataset.Tables("Attendees")
 
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, "Organization Attendees", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            conn.Close()
-        End Try
-    End Sub
+    '    Catch ex As Exception
+    '        MessageBox.Show(ex.Message, "Organization Attendees", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    Finally
+    '        conn.Close()
+    '    End Try
+    'End Sub
 
     Private Sub frmAdmin_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         frmAttendance.TabControl1.SelectedIndex = 0
@@ -567,4 +584,6 @@ Partial Public Class frmAdmin
         frmAttendance.txtUsername.Text = ""
         frmAttendance.Show()
     End Sub
+
+
 End Class
