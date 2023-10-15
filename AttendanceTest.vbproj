@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <StartupObject>AttendanceTest.frmAttendance</StartupObject>
+    <StartupObject>AttendanceTest.frmAdmin</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
     <ApplicationIcon>Img\School Logo\LAYAG.ico</ApplicationIcon>

@@ -23,12 +23,6 @@ Public Class frmAttendance
         Dim yCenter As Double = (tabAttendance.Size.Height / 2) - (panStudentID.Size.Height / 2)
         panStudentID.Location = New Point(xCenter, yCenter)
 
-        '' Center the Logo Panel
-        Dim temp As Double = tabAttendance.Size.Width * 0.4
-        xCenter = panLogos.Location.X
-        yCenter = (tabAttendance.Size.Height / 2) - (panLogos.Size.Height / 2)
-        panLogos.Location = New Point(xCenter, yCenter)
-
         ' Center Login Panel
         xCenter = (tabView.Size.Width / 2) - (panLogin.Size.Width / 2)
         yCenter = (tabView.Size.Height / 2) - (panLogin.Size.Height / 2)
@@ -86,7 +80,7 @@ Public Class frmAttendance
         If Not TestConnection() Then Exit Sub
 
         checkStudentAttendance()
-        updateOrgAttendees()
+        'updateOrgAttendees()
     End Sub
 
     ' Every Second Update
@@ -225,7 +219,7 @@ Public Class frmAttendance
             command.ExecuteNonQuery()
 
             ' Update Org Attendees
-            updateOrgAttendees()
+            'updateOrgAttendees()
 
             ' Reload student data
             checkStudentAttendance()
@@ -241,50 +235,51 @@ Public Class frmAttendance
         ' Unlock Button
         btnSubmit.Enabled = True
     End Sub
-    Private Sub updateOrgAttendees()
-        Dim conn As New MySqlConnection(stConnection)
 
-        Try
-            conn.Open()
-            Dim currentDate As String = DateTime.Now.Date.ToString("yyyy-MM-dd")
-            Dim command As New MySqlCommand($"select tblstudent.ddepartment from tblattendance inner join tblstudent on tblattendance.dstudentid = tblstudent.dstudentid
-                                            where ttimein between '{currentDate} 00:00:00' and '{currentDate} 23:59:59' and ttimeout is null;", conn)
-            Dim reader As MySqlDataReader
-            reader = command.ExecuteReader()
+    'Private Sub updateOrgAttendees()
+    '    Dim conn As New MySqlConnection(stConnection)
 
-            Dim cas, cba, cithm, coecs, lpusc, total As Integer
+    '    Try
+    '        conn.Open()
+    '        Dim currentDate As String = DateTime.Now.Date.ToString("yyyy-MM-dd")
+    '        Dim command As New MySqlCommand($"select tblstudent.ddepartment from tblattendance inner join tblstudent on tblattendance.dstudentid = tblstudent.dstudentid
+    '                                        where ttimein between '{currentDate} 00:00:00' and '{currentDate} 23:59:59' and ttimeout is null;", conn)
+    '        Dim reader As MySqlDataReader
+    '        reader = command.ExecuteReader()
 
-            While reader.Read()
-                ' Iterate through each course
-                Select Case reader(0)
-                    Case "College of International Tourism and Hospitality Management"
-                        cithm += 1
-                    Case "College of Engineering and Computer Studies"
-                        coecs += 1
-                    Case "College of Business and Accountancy"
-                        cba += 1
-                    Case "College of Arts and Sciences"
-                        cas += 1
-                    Case "LPU - ST. CABRINI"
-                        lpusc += 1
-                End Select
+    '        Dim cas, cba, cithm, coecs, lpusc, total As Integer
 
-                total += 1
-            End While
+    '        While reader.Read()
+    '            ' Iterate through each course
+    '            Select Case reader(0)
+    '                Case "College of International Tourism and Hospitality Management"
+    '                    cithm += 1
+    '                Case "College of Engineering and Computer Studies"
+    '                    coecs += 1
+    '                Case "College of Business and Accountancy"
+    '                    cba += 1
+    '                Case "College of Arts and Sciences"
+    '                    cas += 1
+    '                Case "LPU - ST. CABRINI"
+    '                    lpusc += 1
+    '            End Select
 
-            ' Update labels
-            lblCAS.Text = cas
-            lblCBA.Text = cba
-            lblCITHM.Text = cithm
-            lblCOECS.Text = coecs
-            lblLPUSC.Text = lpusc
-            lblTotal.Text = $"Total Current Attendees: {total}"
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, "Organization Attendees", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            conn.Close()
-        End Try
-    End Sub
+    '            total += 1
+    '        End While
+
+    '        ' Update labels
+    '        lblCAS.Text = cas
+    '        lblCBA.Text = cba
+    '        lblCITHM.Text = cithm
+    '        lblCOECS.Text = coecs
+    '        lblLPUSC.Text = lpusc
+    '        lblTotal.Text = $"Total Current Attendees: {total}"
+    '    Catch ex As Exception
+    '        MessageBox.Show(ex.Message, "Organization Attendees", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    Finally
+    '        conn.Close()
+    '    End Try
+    'End Sub
 
     Private Sub btnChange(iState As Integer)
         If iState = 0 Then
