@@ -585,5 +585,79 @@ Partial Public Class frmAdmin
         frmAttendance.Show()
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnRandomize.Click
+        Dim conn As New MySqlConnection(stConnection)
+        Dim currentDate As String = DateTime.Now.Date.ToString("yyyy-MM-dd")
+        Dim students As New List(Of Student)()
 
+
+        Try
+            conn.Open()
+            Dim command As New MySqlCommand($"SELECT dfullname,dyearlevel FROM tblattendance 
+                                            natural join tblstudent
+                                            where ttimein between '{currentDate} 00:00:00' and '{currentDate} 23:59:59'
+                                            ;", conn)
+            Dim reader As MySqlDataReader = command.ExecuteReader()
+            While reader.Read()
+                students.Add(New Student(reader("dfullname").ToString(), reader("dyearlevel").ToString()))
+            End While
+            ' Number of groups
+            Dim numGroups As Integer = 4
+
+            ' Initialize a list of lists for each group
+            Dim groups As New List(Of List(Of Student))(numGroups)
+            For i As Integer = 0 To numGroups - 1
+                groups.Add(New List(Of Student)())
+            Next
+
+            ' Randomize the order of students
+            Dim random As New Random()
+            students = students.OrderBy(Function(x) random.Next()).ToList()
+
+            ' Distribute students evenly into groups
+            For Each student As Student In students
+                ' Find the group with the fewest students of the same year level
+                Dim targetGroup As Integer = 0
+                Dim minYearLevelCount As Integer = groups(0).Count
+
+                For i As Integer = 1 To numGroups - 1
+                    Dim yearLevelCount As Integer = groups(i).Count
+                    If yearLevelCount < minYearLevelCount Then
+                        targetGroup = i
+                        minYearLevelCount = yearLevelCount
+                    End If
+                Next
+
+                ' Add the student to the selected group
+                groups(targetGroup).Add(student)
+            Next
+
+            ' Display the distribution in DataGrids
+            grdGroup1.DataSource = groups(0)
+            grdGroup2.DataSource = groups(1)
+            grdGroup3.DataSource = groups(2)
+            grdGroup4.DataSource = groups(3)
+            'grdGroup1.Columns.Clear()
+            'grdGroup2.Columns.Clear()
+            'grdGroup3.Columns.Clear()
+            'grdGroup4.Columns.Clear()
+            'grdGroup1.Columns.Add("Name", "Name")
+            'grdGroup1.Columns.Add("Year", "Year")
+
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Add User", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+End Class
+
+Public Class Student
+    Public Property Name As String
+    Public Property YearLevel As String
+
+    Public Sub New(name As String, yearLevel As String)
+        Me.Name = name
+        Me.YearLevel = yearLevel
+    End Sub
 End Class

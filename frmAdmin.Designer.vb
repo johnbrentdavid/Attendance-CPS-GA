@@ -22,6 +22,10 @@ Partial Class frmAdmin
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim resources As ComponentModel.ComponentResourceManager = New ComponentModel.ComponentResourceManager(GetType(frmAdmin))
         TabControl1 = New TabControl()
         tabControl = New TabPage()
@@ -74,6 +78,7 @@ Partial Class frmAdmin
         txtStudentID = New TextBox()
         tabGroupings = New TabPage()
         Panel1 = New Panel()
+        btnRandomize = New Button()
         grdGroup1 = New DataGridView()
         grdGroup4 = New DataGridView()
         grdGroup2 = New DataGridView()
@@ -81,7 +86,6 @@ Partial Class frmAdmin
         pnlView = New Panel()
         Label11 = New Label()
         btnClose = New Button()
-        Button1 = New Button()
         TabControl1.SuspendLayout()
         tabControl.SuspendLayout()
         panControl.SuspendLayout()
@@ -118,7 +122,7 @@ Partial Class frmAdmin
         TabControl1.Location = New Point(0, 0)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(1331, 1039)
+        TabControl1.Size = New Size(1950, 1039)
         TabControl1.TabIndex = 0
         ' 
         ' tabControl
@@ -130,7 +134,7 @@ Partial Class frmAdmin
         tabControl.Location = New Point(4, 34)
         tabControl.Name = "tabControl"
         tabControl.Padding = New Padding(3)
-        tabControl.Size = New Size(1323, 1001)
+        tabControl.Size = New Size(1942, 1001)
         tabControl.TabIndex = 1
         tabControl.Text = "Control"
         ' 
@@ -268,7 +272,7 @@ Partial Class frmAdmin
         tabData.Location = New Point(4, 34)
         tabData.Name = "tabData"
         tabData.Padding = New Padding(3)
-        tabData.Size = New Size(1323, 1001)
+        tabData.Size = New Size(1942, 1001)
         tabData.TabIndex = 0
         tabData.Text = "Export"
         ' 
@@ -450,7 +454,7 @@ Partial Class frmAdmin
         tabAddUser.Location = New Point(4, 34)
         tabAddUser.Name = "tabAddUser"
         tabAddUser.Padding = New Padding(3)
-        tabAddUser.Size = New Size(1323, 1001)
+        tabAddUser.Size = New Size(1942, 1001)
         tabAddUser.TabIndex = 2
         tabAddUser.Text = "Add Student"
         ' 
@@ -690,22 +694,32 @@ Partial Class frmAdmin
         tabGroupings.Controls.Add(pnlView)
         tabGroupings.Location = New Point(4, 34)
         tabGroupings.Name = "tabGroupings"
-        tabGroupings.Size = New Size(1323, 1001)
+        tabGroupings.Size = New Size(1942, 1001)
         tabGroupings.TabIndex = 3
         tabGroupings.Text = "Groupings"
         ' 
         ' Panel1
         ' 
         Panel1.Anchor = AnchorStyles.None
-        Panel1.Controls.Add(Button1)
+        Panel1.Controls.Add(btnRandomize)
         Panel1.Controls.Add(grdGroup1)
         Panel1.Controls.Add(grdGroup4)
         Panel1.Controls.Add(grdGroup2)
         Panel1.Controls.Add(grdGroup3)
-        Panel1.Location = New Point(12, 114)
+        Panel1.Location = New Point(134, 145)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(1298, 724)
+        Panel1.Size = New Size(1674, 832)
         Panel1.TabIndex = 13
+        ' 
+        ' btnRandomize
+        ' 
+        btnRandomize.BackColor = Color.WhiteSmoke
+        btnRandomize.Location = New Point(1501, 22)
+        btnRandomize.Name = "btnRandomize"
+        btnRandomize.Size = New Size(156, 46)
+        btnRandomize.TabIndex = 14
+        btnRandomize.Text = "Randomize"
+        btnRandomize.UseVisualStyleBackColor = False
         ' 
         ' grdGroup1
         ' 
@@ -714,14 +728,25 @@ Partial Class frmAdmin
         grdGroup1.AllowUserToOrderColumns = True
         grdGroup1.AllowUserToResizeRows = False
         grdGroup1.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left
+        grdGroup1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         grdGroup1.BackgroundColor = Color.FromArgb(CByte(192), CByte(255), CByte(255))
         grdGroup1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        grdGroup1.Location = New Point(0, 49)
+        DataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = Color.FromArgb(CByte(192), CByte(255), CByte(255))
+        DataGridViewCellStyle1.Font = New Font("Segoe UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point)
+        DataGridViewCellStyle1.ForeColor = SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = DataGridViewTriState.False
+        grdGroup1.DefaultCellStyle = DataGridViewCellStyle1
+        grdGroup1.GridColor = Color.Black
+        grdGroup1.Location = New Point(26, 86)
         grdGroup1.Name = "grdGroup1"
         grdGroup1.ReadOnly = True
+        grdGroup1.RowHeadersVisible = False
         grdGroup1.RowHeadersWidth = 82
         grdGroup1.RowTemplate.Height = 25
-        grdGroup1.Size = New Size(320, 675)
+        grdGroup1.Size = New Size(390, 746)
         grdGroup1.TabIndex = 1
         ' 
         ' grdGroup4
@@ -734,12 +759,22 @@ Partial Class frmAdmin
         grdGroup4.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         grdGroup4.BackgroundColor = Color.FromArgb(CByte(255), CByte(224), CByte(192))
         grdGroup4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        grdGroup4.Location = New Point(975, 49)
+        DataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = Color.FromArgb(CByte(255), CByte(224), CByte(192))
+        DataGridViewCellStyle2.Font = New Font("Segoe UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point)
+        DataGridViewCellStyle2.ForeColor = SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = DataGridViewTriState.False
+        grdGroup4.DefaultCellStyle = DataGridViewCellStyle2
+        grdGroup4.GridColor = Color.Black
+        grdGroup4.Location = New Point(1267, 86)
         grdGroup4.Name = "grdGroup4"
         grdGroup4.ReadOnly = True
+        grdGroup4.RowHeadersVisible = False
         grdGroup4.RowHeadersWidth = 82
         grdGroup4.RowTemplate.Height = 25
-        grdGroup4.Size = New Size(320, 675)
+        grdGroup4.Size = New Size(390, 746)
         grdGroup4.TabIndex = 12
         ' 
         ' grdGroup2
@@ -752,12 +787,22 @@ Partial Class frmAdmin
         grdGroup2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         grdGroup2.BackgroundColor = Color.FromArgb(CByte(192), CByte(255), CByte(192))
         grdGroup2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        grdGroup2.Location = New Point(326, 49)
+        DataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = Color.FromArgb(CByte(192), CByte(255), CByte(192))
+        DataGridViewCellStyle3.Font = New Font("Segoe UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point)
+        DataGridViewCellStyle3.ForeColor = SystemColors.ControlText
+        DataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = DataGridViewTriState.False
+        grdGroup2.DefaultCellStyle = DataGridViewCellStyle3
+        grdGroup2.GridColor = Color.Black
+        grdGroup2.Location = New Point(437, 86)
         grdGroup2.Name = "grdGroup2"
         grdGroup2.ReadOnly = True
+        grdGroup2.RowHeadersVisible = False
         grdGroup2.RowHeadersWidth = 82
         grdGroup2.RowTemplate.Height = 25
-        grdGroup2.Size = New Size(320, 675)
+        grdGroup2.Size = New Size(390, 746)
         grdGroup2.TabIndex = 10
         ' 
         ' grdGroup3
@@ -767,14 +812,25 @@ Partial Class frmAdmin
         grdGroup3.AllowUserToOrderColumns = True
         grdGroup3.AllowUserToResizeRows = False
         grdGroup3.Anchor = AnchorStyles.Bottom Or AnchorStyles.Right
+        grdGroup3.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
         grdGroup3.BackgroundColor = Color.FromArgb(CByte(255), CByte(255), CByte(192))
         grdGroup3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        grdGroup3.Location = New Point(652, 49)
+        DataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = Color.FromArgb(CByte(255), CByte(255), CByte(192))
+        DataGridViewCellStyle4.Font = New Font("Segoe UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point)
+        DataGridViewCellStyle4.ForeColor = SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = DataGridViewTriState.False
+        grdGroup3.DefaultCellStyle = DataGridViewCellStyle4
+        grdGroup3.GridColor = Color.Black
+        grdGroup3.Location = New Point(856, 86)
         grdGroup3.Name = "grdGroup3"
         grdGroup3.ReadOnly = True
+        grdGroup3.RowHeadersVisible = False
         grdGroup3.RowHeadersWidth = 82
         grdGroup3.RowTemplate.Height = 25
-        grdGroup3.Size = New Size(320, 675)
+        grdGroup3.Size = New Size(390, 746)
         grdGroup3.TabIndex = 11
         ' 
         ' pnlView
@@ -782,7 +838,7 @@ Partial Class frmAdmin
         pnlView.BackColor = Color.Transparent
         pnlView.BorderStyle = BorderStyle.Fixed3D
         pnlView.Controls.Add(Label11)
-        pnlView.Location = New Point(503, 17)
+        pnlView.Location = New Point(813, 17)
         pnlView.Name = "pnlView"
         pnlView.Size = New Size(317, 91)
         pnlView.TabIndex = 9
@@ -803,7 +859,7 @@ Partial Class frmAdmin
         btnClose.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         btnClose.BackColor = Color.LightCoral
         btnClose.Font = New Font("Segoe UI", 10.125F, FontStyle.Regular, GraphicsUnit.Point)
-        btnClose.Location = New Point(1250, 0)
+        btnClose.Location = New Point(1869, 0)
         btnClose.Name = "btnClose"
         btnClose.Size = New Size(81, 30)
         btnClose.TabIndex = 2
@@ -811,20 +867,11 @@ Partial Class frmAdmin
         btnClose.Text = "Close"
         btnClose.UseVisualStyleBackColor = False
         ' 
-        ' Button1
-        ' 
-        Button1.Location = New Point(1139, 0)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(156, 46)
-        Button1.TabIndex = 14
-        Button1.Text = "Randomize"
-        Button1.UseVisualStyleBackColor = True
-        ' 
         ' frmAdmin
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1331, 1039)
+        ClientSize = New Size(1950, 1039)
         Controls.Add(btnClose)
         Controls.Add(TabControl1)
         FormBorderStyle = FormBorderStyle.None
@@ -926,5 +973,5 @@ Partial Class frmAdmin
     Friend WithEvents grdGroup3 As DataGridView
     Friend WithEvents grdGroup2 As DataGridView
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnRandomize As Button
 End Class
