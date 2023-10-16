@@ -3,14 +3,15 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
-    <StartupObject>AttendanceTest.frmAdmin</StartupObject>
+    <StartupObject>AttendanceTest.frmAttendance</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
-    <ApplicationIcon>Img\School Logo\LAYAG.ico</ApplicationIcon>
+    <ApplicationIcon>Img\School Logo\CPS_Logo.ico</ApplicationIcon>
+    <PackageIcon>CPS_Logo.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Img\School Logo\LAYAG.ico" />
+    <Content Include="Img\School Logo\CPS_Logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,6 +51,10 @@
     </None>
     <None Update="Img\Org Logo\CPS.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Img\Org Logo\CPS_Logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
     <None Update="Img\Org Logo\IECEP.PNG">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -124,7 +124,7 @@ Partial Class frmAttendance
         lblMessage.BackColor = Color.WhiteSmoke
         lblMessage.FlatStyle = FlatStyle.Flat
         lblMessage.Font = New Font("Segoe UI", 25.875F, FontStyle.Bold, GraphicsUnit.Point)
-        lblMessage.Location = New Point(313, 705)
+        lblMessage.Location = New Point(313, 761)
         lblMessage.Name = "lblMessage"
         lblMessage.Size = New Size(683, 47)
         lblMessage.TabIndex = 7
